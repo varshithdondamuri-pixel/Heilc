@@ -41,7 +41,7 @@ const ContactSection = () => {
           <div className="divider-glow mt-12 mb-10 mx-auto max-w-xs" />
 
           <a
-            href="https://wa.me/918309324612"
+            href="https://wa.me/918309324612?text=Hi%20I%20want%20a%20free%20consultation"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 px-8 py-3.5 rounded-lg bg-[hsl(142,70%,40%)] text-foreground font-medium transition-all duration-300 hover:scale-[1.02] hover:shadow-[0_0_25px_hsl(142,70%,40%,0.3)]"
