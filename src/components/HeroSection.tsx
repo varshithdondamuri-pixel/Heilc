@@ -20,15 +20,7 @@ const Hero = () => {
       <div className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] rounded-full bg-accent/5 blur-[100px] animate-pulse-glow pointer-events-none" style={{ animationDelay: "1.5s" }} />
 
       <div className="relative z-10 max-w-4xl mx-auto text-center">
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass text-xs text-muted-foreground mb-8"
-        >
-          <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse-glow" />
-          AI-Powered Digital Agency
-        </motion.div>
+
 
         <h1 className="heading-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[1.1] mb-6">
           {words.map((word, i) => (
@@ -38,11 +30,10 @@ const Hero = () => {
               initial="hidden"
               animate="visible"
               variants={wordVariants}
-              className={`inline-block mr-[0.3em] ${
-                ["Intelligent", "AI"].includes(word)
-                  ? "gradient-text-hero"
-                  : ""
-              }`}
+              className={`inline-block mr-[0.3em] ${["Intelligent", "AI"].includes(word)
+                ? "gradient-text-hero"
+                : ""
+                }`}
             >
               {word}
             </motion.span>
@@ -78,20 +69,6 @@ const Hero = () => {
           </a>
         </motion.div>
 
-        {/* Abstract AI visual */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.5, duration: 1 }}
-          className="mt-16 relative"
-        >
-          <div className="mx-auto w-full max-w-2xl h-[160px] rounded-2xl overflow-hidden relative animate-float">
-            <div className="absolute inset-0 bg-gradient-to-r from-primary/15 via-accent/10 to-primary/15 blur-[2px]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-primary/10 blur-[60px]" />
-            <div className="absolute top-1/3 right-1/4 w-24 h-24 rounded-full bg-accent/10 blur-[40px]" />
-          </div>
-        </motion.div>
       </div>
     </section>
   );

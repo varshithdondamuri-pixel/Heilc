@@ -7,7 +7,6 @@ import ProcessSection from "@/components/ProcessSection";
 import WhyChooseSection from "@/components/WhyChooseSection";
 import CTASection from "@/components/CTASection";
 import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
 
 const Index = () => {
   return (
@@ -28,7 +27,6 @@ const Index = () => {
         <div className="divider-glow mx-auto max-w-md" />
         <ContactSection />
       </main>
-      <Footer />
     </div>
   );
 };

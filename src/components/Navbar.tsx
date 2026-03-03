@@ -30,9 +30,8 @@ const Navbar = () => {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? "glass py-3" : "py-5"
-        }`}
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "glass py-3" : "py-5"
+          }`}
       >
         <div className="container max-w-6xl mx-auto flex items-center justify-between px-6">
           <a href="#" className="group flex items-center gap-3">
@@ -41,7 +40,7 @@ const Navbar = () => {
               <img
                 src={heilcLogo}
                 alt="HEILC Logo"
-                className="relative w-10 h-10 rounded-lg object-contain brightness-150 contrast-125 drop-shadow-[0_0_8px_hsl(215_100%_65%/0.4)] group-hover:drop-shadow-[0_0_16px_hsl(215_100%_65%/0.6)] transition-all duration-500"
+                className="relative w-8 h-8 rounded-sm object-contain transition-all duration-500"
               />
             </div>
             <span className="font-display font-bold text-xl text-foreground tracking-tight drop-shadow-[0_0_10px_hsl(215_100%_65%/0.3)]">
