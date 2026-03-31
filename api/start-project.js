@@ -1,34 +1,26 @@
 import "dotenv/config";
 
-import express from "express";
-
 import {
   applyRateLimit,
-  getHealthPayload,
   parseProjectRequest,
   securityHeaders,
   sendProjectRequestEmail,
   verifyOrigin,
 } from "../backend/projectMail.mjs";
 
-const app = express();
-const port = Number(process.env.PORT || 8787);
-
-app.disable("x-powered-by");
-app.use(express.json({ limit: "16kb" }));
-
-app.use((req, res, next) => {
+export default async function handler(req, res) {
   Object.entries(securityHeaders).forEach(([key, value]) => {
     res.setHeader(key, value);
   });
-  next();
-});
 
-app.get("/api/health", (_req, res) => {
-  res.json(getHealthPayload());
-});
+  if (req.method !== "POST") {
+    res.setHeader("Allow", "POST");
+    return res.status(405).json({
+      ok: false,
+      error: "Method not allowed.",
+    });
+  }
 
-app.post("/api/start-project", async (req, res) => {
   const originCheck = verifyOrigin(req.headers.origin);
   if (!originCheck.ok) {
     return res.status(originCheck.status).json({ ok: false, error: originCheck.error });
@@ -38,7 +30,7 @@ app.post("/api/start-project", async (req, res) => {
   const ip =
     typeof forwarded === "string"
       ? forwarded.split(",")[0].trim()
-      : req.socket.remoteAddress || "unknown";
+      : req.socket?.remoteAddress || "unknown";
 
   const rateLimitResult = applyRateLimit(ip);
   if (!rateLimitResult.ok) {
@@ -55,9 +47,5 @@ app.post("/api/start-project", async (req, res) => {
     return res.status(sendResult.status).json({ ok: false, error: sendResult.error });
   }
 
-  return res.json({ ok: true });
-});
-
-app.listen(port, () => {
-  console.log(`Start-project mail server listening on http://127.0.0.1:${port}`);
-});
+  return res.status(200).json({ ok: true });
+}
