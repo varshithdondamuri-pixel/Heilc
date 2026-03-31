@@ -1,64 +1,83 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 import { useRef } from "react";
 
 const steps = [
-  { number: "01", title: "Understanding Your Vision", description: "Deep dive into your goals, audience, and competitive landscape." },
-  { number: "02", title: "Strategy & System Planning", description: "Architecture design, AI integration mapping, and project roadmap." },
-  { number: "03", title: "Development & AI Integration", description: "Building your solution with cutting-edge technologies and AI systems." },
-  { number: "04", title: "Testing & Launch", description: "Rigorous quality assurance followed by a seamless deployment." },
-  { number: "05", title: "Optimization & Growth", description: "Continuous monitoring, optimization, and scaling support." },
+  { number: "01", title: "Discovery & Strategy", description: "We deep dive into your business, identifying exactly where AI and automation can drive growth." },
+  { number: "02", title: "Architecture Design", description: "Mapping out the technical blueprint, connecting AI agents, CRM, and marketing platforms." },
+  { number: "03", title: "Development pipeline", description: "Building your AI infrastructure and ultra-modern web properties with precision and speed." },
+  { number: "04", title: "Testing & Refinement", description: "Rigorous simulated load testing to ensure your AI agents respond perfectly to any edge case." },
+  { number: "05", title: "Launch & Scale", description: "Deployment of autonomous systems with continuous learning and conversion optimization." },
 ];
 
 const StepItem = ({ step, index }: { step: typeof steps[0]; index: number }) => {
   const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-30px" });
+  const inView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <motion.div
-      ref={ref}
-      initial={{ opacity: 0, x: -20 }}
-      animate={inView ? { opacity: 1, x: 0 } : {}}
-      transition={{ delay: index * 0.1, duration: 0.5 }}
-      className="flex gap-6 items-start"
-    >
-      <div className="relative flex-shrink-0">
-        <div className={`w-[47px] h-[47px] rounded-full border flex items-center justify-center transition-all duration-500 ${
-          inView
-            ? "border-primary/50 bg-primary/10 shadow-[0_0_20px_hsl(var(--primary)/0.2)]"
-            : "border-border bg-card"
-        }`}>
-          <span className="text-xs font-display font-semibold text-primary">{step.number}</span>
-        </div>
+    <div ref={ref} className="relative flex gap-8 md:gap-12 items-start group">
+      <div className="relative flex-shrink-0 z-10 mt-1">
+        <motion.div 
+          initial={{ scale: 0, opacity: 0 }}
+          animate={inView ? { scale: 1, opacity: 1 } : {}}
+          transition={{ duration: 0.5, type: "spring", stiffness: 200, damping: 20 }}
+          className={`w-12 h-12 rounded-full border-2 flex items-center justify-center transition-all duration-700 ${
+            inView
+              ? "border-primary bg-background shadow-[0_0_30px_hsl(var(--primary)/0.4)]"
+              : "border-border bg-card"
+          }`}
+        >
+          <span className="text-sm font-display font-bold text-primary">{step.number}</span>
+        </motion.div>
       </div>
-      <div className="pt-2">
-        <h3 className="font-display font-semibold text-foreground mb-1">{step.title}</h3>
-        <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
-      </div>
-    </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        animate={inView ? { opacity: 1, x: 0 } : {}}
+        transition={{ duration: 0.6, ease: "easeOut", delay: 0.2 }}
+        className="pt-1 pb-12"
+      >
+        <h3 className="font-display font-semibold text-2xl text-foreground mb-3">{step.title}</h3>
+        <p className="text-base text-muted-foreground leading-relaxed max-w-xl">{step.description}</p>
+      </motion.div>
+    </div>
   );
 };
 
 const ProcessSection = () => {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true });
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start center", "end center"]
+  });
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
   return (
-    <section id="process" className="section-padding relative">
-      <div className="container max-w-3xl mx-auto">
+    <section id="process" className="section-padding relative z-10">
+      <div className="container max-w-4xl mx-auto">
         <motion.div
-          ref={ref}
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-24"
         >
-          <span className="text-xs uppercase tracking-[0.2em] text-primary font-medium">Process</span>
-          <h2 className="heading-display text-3xl md:text-4xl mt-3">How We Work</h2>
+          <span className="text-sm uppercase tracking-[0.25em] text-primary font-bold mb-4 block">Process</span>
+          <h2 className="heading-display text-4xl md:text-5xl lg:text-6xl text-foreground">How It Works</h2>
         </motion.div>
 
-        <div className="relative">
-          <div className="absolute left-[23px] top-0 bottom-0 w-px bg-gradient-to-b from-primary/30 via-primary/10 to-transparent" />
-          <div className="space-y-10">
+        <div className="relative" ref={containerRef}>
+          {/* Background subtle line */}
+          <div className="absolute left-[23px] top-0 bottom-12 w-0.5 bg-border/50" />
+          
+          {/* Animated active line */}
+          <motion.div 
+            className="absolute left-[23px] top-0 w-0.5 bg-primary drop-shadow-[0_0_8px_hsl(var(--primary)/0.8)] origin-top rounded-full"
+            style={{ height: lineHeight }}
+          />
+          
+          <div className="relative">
             {steps.map((step, i) => (
               <StepItem key={step.number} step={step} index={i} />
             ))}

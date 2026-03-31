@@ -24,8 +24,8 @@
     --muted: 225 15% 14%;
     --muted-foreground: 215 15% 65%;
 
-    --accent: 250 80% 70%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 190 95% 68%;
+    --accent-foreground: 222 47% 11%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
@@ -38,7 +38,7 @@
 
     /* Custom tokens */
     --glow-primary: 215 100% 65%;
-    --glow-accent: 250 80% 70%;
+    --glow-accent: 190 95% 68%;
     --surface-glass: 225 20% 12%;
     --surface-elevated: 225 18% 13%;
 
