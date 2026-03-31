@@ -80,15 +80,18 @@ export const verifyOrigin = (origin) => {
     return { ok: true };
   }
 
-  if (!allowedOrigins.has(origin)) {
-    return {
-      ok: false,
-      status: 403,
-      error: "Origin not allowed.",
-    };
+  if (
+    allowedOrigins.has(origin) ||
+    origin.endsWith(".vercel.app")
+  ) {
+    return { ok: true };
   }
 
-  return { ok: true };
+  return {
+    ok: false,
+    status: 403,
+    error: "Origin not allowed.",
+  };
 };
 
 export const applyRateLimit = (ip) => {
