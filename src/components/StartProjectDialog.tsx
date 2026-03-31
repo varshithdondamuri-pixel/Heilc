@@ -261,11 +261,7 @@ const StartProjectDialog = ({ trigger }: StartProjectDialogProps) => {
 
         {errorMessage ? <p className="text-sm text-rose-300">{errorMessage}</p> : null}
         {successMessage ? <p className="text-sm text-emerald-300">{successMessage}</p> : null}
-        {!successMessage ? (
-          <p className="text-sm text-slate-500">
-            Your request is sent through the site backend.
-          </p>
-        ) : null}
+
       </DialogContent>
     </Dialog>
   );

@@ -82,7 +82,8 @@ export const verifyOrigin = (origin) => {
 
   if (
     allowedOrigins.has(origin) ||
-    origin.endsWith(".vercel.app")
+    origin.endsWith(".vercel.app") ||
+    origin.endsWith("heilc.com")
   ) {
     return { ok: true };
   }
