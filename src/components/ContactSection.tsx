@@ -10,13 +10,15 @@ const ContactSection = () => {
           
           <div className="flex gap-8 items-center">
             <a 
-              href="mailto:your_email@gmail.com" 
+              href="mailto:Heilc.agen@gmail.com" 
               className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
             >
               Email Us
             </a>
             <a 
-              href="https://wa.me/1234567890" 
+              href="https://wa.me/918309324612" 
+              target="_blank"
+              rel="noopener noreferrer"
               className="text-sm font-medium text-foreground/80 hover:text-primary transition-colors duration-300"
             >
               WhatsApp

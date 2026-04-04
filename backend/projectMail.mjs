@@ -157,7 +157,7 @@ export const sendProjectRequestEmail = async ({ name, email, phone, projectType,
   try {
     await transporter.sendMail({
       from: process.env.MAIL_FROM || process.env.SMTP_USER,
-      to: process.env.START_PROJECT_TO || "your_email@gmail.com",
+      to: process.env.START_PROJECT_TO || "Heilc.agen@gmail.com",
       replyTo: email,
       subject: `New Project Request from ${name}`,
       text: [
